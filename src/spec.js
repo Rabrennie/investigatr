@@ -24,11 +24,8 @@ describe("Test 2", {
         data.test += 1;
     },
     tests: {
-        test1: function (data) {
-            return data.test == 1;
-        },
-        test2: function (data) {
-            return data.test == asd;
+        "the best test": function (data) {
+            return vcvc == asd;
         }
     }
 })

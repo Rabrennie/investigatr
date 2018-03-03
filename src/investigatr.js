@@ -2,6 +2,7 @@ var investigatr = new (function () {
     this.options = {
         output: true,
     };
+    
     this.tests = {};
     
     this.run = function () {
