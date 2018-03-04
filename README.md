@@ -4,17 +4,16 @@ investigatr is a minimal, extensible JavaScript test framework that runs in the 
 
 ## Basic Usage
 
-First, clone `investigatr`
+First, install `investigatr`
 
 ```bash
-git clone https://github.com/Rabrennie/investigatr.git
+npm install investigatr
 ```
 
 Next, create `my.spec.js` and `myTestRunner.html` in the cloned folder. Our file structure will look like:
 ```
 investigatr
-  - src
-  - tests
+  - node_odules
   - my.spec.js
   - myTestRunner.html
 ```
@@ -32,7 +31,7 @@ testGroup('Test Group Name', {
 ```
 
 ```html
-<!-- mytestRunner.html-->
+<!-- myTestRunner.html-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,9 +46,8 @@ testGroup('Test Group Name', {
     <div class="investigatr">
 
     </div>
-    <script src="../src/investigatr-htmlrenderer.js"></script>
-    <script src="../src/investigatr.js"></script>
-    <script src="./spec.js"></script>
+    <script src="./node_modules/investigatr/dist/investigatr.js"></script>
+    <script src="./my.spec.js"></script>
     <script>
         investigatr.run();
     </script>
