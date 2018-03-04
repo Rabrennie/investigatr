@@ -4,6 +4,10 @@ describe('Investigatr', {
         data.investigatr = new Investigatr();
     },
     tests: {
+        "options.output defaults to true": function (data) {
+            return assertEquals(data.investigatr.options.output, true);
+        },
+
         "Init sets options.output": function (data) {
             data.investigatr.init({
                 output: false
@@ -11,11 +15,26 @@ describe('Investigatr', {
             return assertEquals(data.investigatr.options.output, false);
         },
 
-        "Init sets options.containerEl": function (data) {
+        "Init sets options.renderer": function (data) {
             data.investigatr.init({
-                containerEl: "testing"
+                renderer: "test",
             });
-            return assertEquals(data.investigatr.options.containerEl, "testing");
+            return assertEquals(data.investigatr.options.renderer, "test");
+        },
+    }
+})
+
+describe('.assertEqual()', {
+    data: {},
+    tests: {
+        "result is true when 1 == 1 ": function(data) {
+            let result = assertEquals(1,1).result;
+            return assertEquals(result, true);
+        },
+
+        "result is false when 1 == 2 ": function(data) {
+            let result = assertEquals(1,2).result;
+            return assertEquals(result, false);
         }
     }
 })
