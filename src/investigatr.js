@@ -33,8 +33,9 @@ function Investigatr() {
 
         for (let testName in options.tests) {
             options.data = { ...originalData };
-            options.beforeEach.apply(options, [options.data]);
-            
+            if(options.beforeEach != null) {
+                options.beforeEach.apply(options, [options.data]);
+            }
             let pass, assertion, error;
 
             try {
