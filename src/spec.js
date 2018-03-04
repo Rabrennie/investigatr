@@ -6,11 +6,11 @@ describe("Test 1", {
         data.test += 1;
     },
     tests: {
-        "1 == 1": function (data) {
+        "1 equals 1": function (data) {
             return assertEquals(data.test, 1);
         },
-        "1 == 2": function (data) {
-            return assertEquals(data.test, 2);
+        "1 does not equal 2": function (data) {
+            return assertNotEquals(data.test, 2);
         },
         "test2": function (data) {
             return assertEquals(data.test, asd);

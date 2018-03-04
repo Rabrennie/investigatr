@@ -98,3 +98,9 @@ function assertEquals(a, b) {
     };
 }
 
+function assertNotEquals(a, b) {
+    return {
+        result: a != b,
+        assertion: a + " != " + b
+    };
+}
