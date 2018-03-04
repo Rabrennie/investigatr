@@ -1,7 +1,7 @@
 function Investigatr() {
     this.options = {
         output: true,
-        containerEl: document.querySelector('.investigatr')
+        renderer: new InvestigatrHtmlRenderer(),
     };
 
     this.tests = {};
@@ -21,7 +21,7 @@ function Investigatr() {
         
         if(this.options.output) {
             const time = ((endTime - startTime % 60000) / 1000);
-            this.displayResults(time)
+            this.options.renderer.render(time, this.results);
         }
     }
 
@@ -58,32 +58,7 @@ function Investigatr() {
     this.init = function(options) {
         this.options = Object.assign(this.options, options);
     }
-
-    this.displayResults = function(time) {
-        
-        const timeEl = document.createElement('div');
-        timeEl.innerHTML = `elapsed: ${time} secs`;
-
-        this.options.containerEl.appendChild(timeEl);
-
-        for (const result in this.results) {
-            if (this.results.hasOwnProperty(result)) {
-                const element = this.results[result];
-                const resultEl = document.createElement('ul');
-                for (const test in element) {
-                    if (element.hasOwnProperty(test)) {
-                        const testResult = element[test];
-                        const testEl = document.createElement('li');
-                        testEl.innerHTML = testResult.pass ? 'pass': 'fail';
-                        testEl.innerHTML += ` - ${test} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source.split('\n        ').join('\n')}</pre>`
-                        resultEl.appendChild(testEl);
-                    }
-                }
-                this.options.containerEl.appendChild(resultEl);
-            }
-        }
-
-    }
+    
 }
 
 var investigatr = new Investigatr();
