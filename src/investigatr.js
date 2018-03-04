@@ -35,10 +35,12 @@ var investigatr = new (function () {
             options.data = { ...originalData };
             options.beforeEach.apply(options, [options.data]);
             
-            let pass, error;
+            let pass, assertion, error;
 
             try {
-                pass = options.tests[testName].apply(options, [options.data]);
+                const assert = options.tests[testName].apply(options, [options.data]);
+                pass = assert.result;
+                assertion = assert.assertion;
             } catch (e) {
                 pass = false;
                 error = e.stack;
@@ -47,6 +49,7 @@ var investigatr = new (function () {
             this.results[name][testName] = {
                 pass,
                 error,
+                assertion,
                 source: options.tests[testName].toString(),
             };
         }
@@ -63,4 +66,11 @@ var investigatr = new (function () {
 
 function describe(name, options) {
     investigatr.tests[name] = options;
+}
+
+function assertEquals(a, b) {
+    return {
+        result: a == b,
+        assertion: a + " == " + b
+    };
 }

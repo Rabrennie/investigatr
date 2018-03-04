@@ -6,11 +6,14 @@ describe("Test 1", {
         data.test += 1;
     },
     tests: {
-        "test1": function (data) {
-            return data.test == 1;
+        "1 == 1": function (data) {
+            return assertEquals(data.test, 1);
+        },
+        "1 == 2": function (data) {
+            return assertEquals(data.test, 2);
         },
         "test2": function (data) {
-            return data.test == asd;
+            return assertEquals(data.test, asd);
         }
     }
 })
@@ -24,7 +27,7 @@ describe("Test 2", {
     },
     tests: {
         "the best test": function (data) {
-            return vcvc == asd;
+            return assertEquals(vcvc, asd);
         }
     }
 })
