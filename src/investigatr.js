@@ -36,12 +36,10 @@ function Investigatr() {
             if(options.beforeEach != null) {
                 options.beforeEach(options.data);
             }
-            let pass, assertion, error;
+            let pass = true, assertion, error;
 
             try {
-                const assert = options.tests[testName](options.data);
-                pass = assert.result;
-                assertion = assert.message;
+                options.tests[testName](options.data);
             } catch (e) {
                 pass = false;
                 error = e.stack;
@@ -50,7 +48,6 @@ function Investigatr() {
             this.results[groupName][testName] = {
                 pass,
                 error,
-                assertion,
                 source: options.tests[testName].toString(),
             };
         }
@@ -68,26 +65,19 @@ function testGroup(name, options) {
     investigatr.tests[name] = options;
 }
 
+function AssertException(message) {
+    this.name = 'AssertException';
+    this.stack = message;
+}
+
 function assertEquals(actual, expected) {
-    const assertionResponse =  {
-        result: actual == expected,
-    };
-
-    if(!assertionResponse.result) {
-        assertionResponse.message = `expected(${expected}) is not equal to actual(${actual})`;
+    if(actual != expected) {
+        throw new AssertException(`expected(${expected}) is not equal to actual(${actual})`);
     }
-
-    return assertionResponse;
 }
 
 function assertNotEquals(actual, expected) {
-    const assertionResponse =  {
-        result: actual != expected,
-    };
-
-    if(!assertionResponse.result) {
-        assertionResponse.message = `expected(${expected}) is equal to actual(${actual})`;
+    if(actual == expected) {
+        throw new AssertException(`expected(${expected}) is equal to actual(${actual})`);
     }
-
-    return assertionResponse;
 }

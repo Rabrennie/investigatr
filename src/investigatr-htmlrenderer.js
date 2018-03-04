@@ -31,9 +31,7 @@ function InvestigatrHtmlRenderer(options) {
                             passCount += 1
                         }
                         testEl.innerHTML = `<div style="cursor: pointer; color: ${testResult.pass ? '#9c9c9c':'#a90303;'}"> ${testResult.pass ? '&#10003;': '&#10005;'} ${testName}</div>`;
-                        if(testResult.assertion != null) {
-                            testEl.innerHTML += `<pre style="margin-left: 30px;color: #ff6565;">${testResult.assertion}</pre>`;
-                        }
+
                         if(testResult.error != null) {
                             testEl.innerHTML += `<pre style="margin-left: 30px;color: #ff6565;">${testResult.error}</pre>`;
                         }
