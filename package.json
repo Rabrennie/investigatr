@@ -6,7 +6,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/Rabrennie/investigatr/issues"
   },
-  "homepage": "https://github.com/Rabrennie/investigatr#readme"
+  "homepage": "https://github.com/Rabrennie/investigatr#readme",
+  "devDependencies": {
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10"
+  },
+  "dependencies": {}
 }

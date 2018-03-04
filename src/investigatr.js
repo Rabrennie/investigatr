@@ -1,3 +1,5 @@
+const InvestigatrHtmlRenderer = require('./investigatr-htmlrenderer.js');
+
 function Investigatr() {
     this.options = {
         output: true,
@@ -59,8 +61,6 @@ function Investigatr() {
     
 }
 
-const investigatr = new Investigatr();
-
 function testGroup(name, options) {
     investigatr.tests[name] = options;
 }
@@ -80,4 +80,12 @@ function assertNotEquals(actual, expected) {
     if(actual == expected) {
         throw new AssertException(`expected(${expected}) is equal to actual(${actual})`);
     }
+}
+
+module.exports = {
+    Investigatr,
+    testGroup,
+    AssertException,
+    assertEquals,
+    assertNotEquals,
 }

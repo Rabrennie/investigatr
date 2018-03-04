@@ -54,3 +54,5 @@ function InvestigatrHtmlRenderer(options) {
 
     }
 }
+
+module.exports = InvestigatrHtmlRenderer;
