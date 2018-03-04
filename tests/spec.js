@@ -8,14 +8,18 @@ testGroup('Investigatr', {
             return assertEquals(data.investigatr.options.output, true);
         },
 
-        "Init sets options.output": function (data) {
+        "options.renderer defaults to InvestigatrHtmlRenderer": function (data) {
+            return assertEquals(data.investigatr.options.renderer.constructor.name, 'InvestigatrHtmlRenderer');
+        },
+
+        "init sets options.output": function (data) {
             data.investigatr.init({
                 output: false
             });
             return assertEquals(data.investigatr.options.output, false);
         },
 
-        "Init sets options.renderer": function (data) {
+        "init sets options.renderer": function (data) {
             data.investigatr.init({
                 renderer: "test",
             });
@@ -24,7 +28,7 @@ testGroup('Investigatr', {
     }
 });
 
-testGroup('.assertEqual()', {
+testGroup('assertEqual', {
     data: {},
     tests: {
         "result is true when 1 == 1 ": function(data) {
@@ -44,7 +48,7 @@ testGroup('.assertEqual()', {
     }
 });
 
-testGroup('.assertNotEqual()', {
+testGroup('assertNotEqual', {
     data: {},
     tests: {
         "result is false when 1 == 1 ": function(data) {
@@ -62,9 +66,9 @@ testGroup('.assertNotEqual()', {
             return assertEquals(message, 'expected(1) is equal to actual(1)');
         }
     }
-})
+});
 
-testGroup('failing test', {
+testGroup('Failing tests for renderer', {
     data: {},
     tests: {
         "result is false when 1 == 1 ": function(data) {
@@ -77,4 +81,4 @@ testGroup('failing test', {
             return assertEquals(result, false);
         },
     }
-})
+});
