@@ -62,11 +62,11 @@ Open mytestRunner.html in a browser and you should see your test passing. For a 
 
 ## testGroup options
 
-### `data | object | required`
+#### `data | object | required`
 
 the data that should be set at the start of every test
 
-### `tests | object | required`
+#### `tests | object | required`
 
 an object containing all the tests for this group. Keys are the test names and values should be functions.
 
@@ -78,7 +78,7 @@ tests: {
 }
 ```
 
-### `beforeEach | function(data) | optional`
+#### `beforeEach | function(data) | optional`
 function to call before every test. Can be used to set up data etc.
 
 
@@ -93,17 +93,17 @@ investigatr.init({
 })
 ```
 
-### `output | boolean`
+#### `output | boolean`
 
 if output is set to false the render method on the renderer will not be called
 
-### `renderer | instance of a class that implements a render method`
+#### `renderer | instance of a class that implements a render method`
 
 Renderer is how the results will be renderer. It should be an instance of a class that implements a render method.
 
 ## Extending investigatr
 
-### coming soon
+#### coming soon
 
 # Contributing
 
