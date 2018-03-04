@@ -60,6 +60,8 @@ testGroup('Test Group Name', {
 
 Open mytestRunner.html in a browser and you should see your test passing. For a more complicated example view the spec files in the tests folder.
 
+By default investigatr outputs the results to a div element with the class of investigatr.
+
 ## testGroup options
 
 #### `data | object | required`
