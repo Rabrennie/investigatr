@@ -1,6 +1,13 @@
 testGroup('Investigatr', {
     data: {},
     beforeEach: function (data) {
+        data.mockRenderer = new (function() {
+            this.calls = 0;
+
+            this.render = function() {
+                this.calls += 1;
+            }
+        });
         data.investigatr = new Investigatr();
     },
     tests: {
@@ -24,6 +31,27 @@ testGroup('Investigatr', {
                 renderer: "test",
             });
             assertEquals(data.investigatr.options.renderer, "test");
+        },
+
+        "run calls renderer.render if options.output is true": function (data) {
+            data.investigatr.init({
+                renderer: data.mockRenderer
+            });
+
+            data.investigatr.run()
+
+            assertEquals(data.mockRenderer.calls, 1);
+        },
+
+        "run doesn't call renderer.render if options.output is false": function (data) {
+            data.investigatr.init({
+                output: false,
+                renderer: data.mockRenderer
+            });
+
+            data.investigatr.run()
+
+            assertEquals(data.mockRenderer.calls, 0);
         },
     }
 });
