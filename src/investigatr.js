@@ -68,7 +68,6 @@ function testGroup(name, options) {
     investigatr.tests[name] = options;
 }
 
-// TODO: maybe these should return errors
 function assertEquals(actual, expected) {
     const assertionResponse =  {
         result: actual == expected,
