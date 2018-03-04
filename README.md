@@ -25,7 +25,7 @@ testGroup('Test Group Name', {
     data: {},
     tests: {
         "verify investigatr is working": function (data) {
-            return assertEquals(1, 1);
+            assertEquals(1, 1);
         },
     }
 });
@@ -73,7 +73,7 @@ an object containing all the tests for this group. Keys are the test names and v
 ```javascript
 tests: {
     "test name": function() {
-        return assertEquals(1,1);
+        assertEquals(1,1);
     }
 }
 ```
