@@ -9,15 +9,15 @@ function Investigatr() {
     this.results = {};
     
     this.run = function () {
-        var startTime = performance.now();
+        const startTime = performance.now();
 
-        for (const test in this.tests) {
-            if (this.tests.hasOwnProperty(test)) {
-                this.runTest(test, this.tests[test]);
+        for (const groupName in this.tests) {
+            if (this.tests.hasOwnProperty(groupName)) {
+                this.runTest(groupName, this.tests[groupName]);
             }
         }
 
-        var endTime = performance.now();
+        const endTime = performance.now();
         
         if(this.options.output) {
             const time = ((endTime - startTime % 60000) / 1000);
@@ -25,11 +25,11 @@ function Investigatr() {
         }
     }
 
-    this.runTest = function (name, test) {
+    this.runTest = function (groupName, test) {
         const options = test;
         const originalData = { ...options.data };
 
-        this.results[name] = {};
+        this.results[groupName] = {};
 
         for (let testName in options.tests) {
             options.data = { ...originalData };
@@ -47,7 +47,7 @@ function Investigatr() {
                 error = e.stack;
             }
 
-            this.results[name][testName] = {
+            this.results[groupName][testName] = {
                 pass,
                 error,
                 assertion,
@@ -62,12 +62,13 @@ function Investigatr() {
     
 }
 
-var investigatr = new Investigatr();
+const investigatr = new Investigatr();
 
-function describe(name, options) {
+function testGroup(name, options) {
     investigatr.tests[name] = options;
 }
 
+// TODO: maybe these should return errors
 function assertEquals(a, b) {
     return {
         result: a == b,

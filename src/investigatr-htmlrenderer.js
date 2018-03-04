@@ -3,6 +3,7 @@ function InvestigatrHtmlRenderer(options) {
         containerEl: document.querySelector('.investigatr')
     }, options);
 
+    // TODO: refactor
     this.render = function(time, results) {
         
         const timeEl = document.createElement('div');
@@ -15,21 +16,21 @@ function InvestigatrHtmlRenderer(options) {
         let testCount = 0;
         let passCount = 0;
 
-        for (const result in results) {
-            if (results.hasOwnProperty(result)) {
-                const element = results[result];
+        for (const groupName in results) {
+            if (results.hasOwnProperty(groupName)) {
+                const group = results[groupName];
                 const resultEl = document.createElement('div');
-                resultEl.innerHTML = `<h3>${result}</h3><ul></ul>`;
-                for (const test in element) {
-                    if (element.hasOwnProperty(test)) {
-                        const testResult = element[test];
+                resultEl.innerHTML = `<h3>${groupName}</h3><ul></ul>`;
+                for (const testName in group) {
+                    if (group.hasOwnProperty(testName)) {
+                        const testResult = group[testName];
                         const testEl = document.createElement('li');
                         testCount += 1;
                         if(testResult.pass) {
                             passCount += 1
                         }
                         testEl.innerHTML = testResult.pass ? 'pass': 'fail';
-                        testEl.innerHTML += ` - ${test} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source.split('\n        ').join('\n')}</pre>`
+                        testEl.innerHTML += ` - ${testName} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source.split('\n        ').join('\n')}</pre>`
                         resultEl.querySelector('ul').appendChild(testEl);
                     }
                 }

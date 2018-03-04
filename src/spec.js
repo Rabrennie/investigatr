@@ -1,4 +1,4 @@
-describe('Investigatr', {
+testGroup('Investigatr', {
     data: {},
     beforeEach: function (data) {
         data.investigatr = new Investigatr();
@@ -24,7 +24,7 @@ describe('Investigatr', {
     }
 })
 
-describe('.assertEqual()', {
+testGroup('.assertEqual()', {
     data: {},
     tests: {
         "result is true when 1 == 1 ": function(data) {
