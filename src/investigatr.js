@@ -59,8 +59,31 @@ var investigatr = new (function () {
         this.options = Object.assign(this.options, options);
     }
 
-    this.displayResults = function() {
+    this.displayResults = function(time) {
         
+        const timeEl = document.createElement('div');
+        timeEl.innerHTML = `elapsed: ${time} secs`;
+
+        this.options.containerEl.appendChild(timeEl);
+
+        for (const result in this.results) {
+            if (this.results.hasOwnProperty(result)) {
+                const element = this.results[result];
+                const resultEl = document.createElement('ul');
+                for (const test in element) {
+                    if (element.hasOwnProperty(test)) {
+                        const testResult = element[test];
+                        const testEl = document.createElement('li');
+                        testEl.innerHTML = testResult.pass ? 'pass': 'fail';
+                        testEl.innerHTML += ` - ${test} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source}</pre>`
+                        resultEl.appendChild(testEl);
+                        console.log(testResult);
+                    }
+                }
+                this.options.containerEl.appendChild(resultEl);
+            }
+        }
+
     }
 });
 
@@ -74,3 +97,4 @@ function assertEquals(a, b) {
         assertion: a + " == " + b
     };
 }
+
