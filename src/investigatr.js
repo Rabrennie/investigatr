@@ -34,12 +34,12 @@ function Investigatr() {
         for (let testName in options.tests) {
             options.data = { ...originalData };
             if(options.beforeEach != null) {
-                options.beforeEach.apply(options, [options.data]);
+                options.beforeEach(options.data);
             }
             let pass, assertion, error;
 
             try {
-                const assert = options.tests[testName].apply(options, [options.data]);
+                const assert = options.tests[testName](options.data);
                 pass = assert.result;
                 assertion = assert.message;
             } catch (e) {
