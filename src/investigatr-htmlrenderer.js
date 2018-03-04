@@ -6,7 +6,6 @@ function InvestigatrHtmlRenderer(options) {
     // TODO: refactor
     this.render = function(time, results) {
         this.options.containerEl.style.fontfamily = "Arial";
-        console.log(this.options.containerEl.style);
         const timeEl = document.createElement('div');
         const totalTests = document.createElement('div');
         timeEl.innerHTML = `elapsed: ${time} secs`;
