@@ -25,21 +25,27 @@ function InvestigatrHtmlRenderer(options) {
                     if (group.hasOwnProperty(testName)) {
                         const testResult = group[testName];
                         const testEl = document.createElement('li');
+                        testEl.style.cursor = 'pointer';
                         testCount += 1;
                         if(testResult.pass) {
                             passCount += 1
                         }
-                        testEl.innerHTML = testResult.pass ? 'pass': 'fail';
-                        testEl.innerHTML += ` - ${testName}`;
+                        testEl.innerHTML = `<div> ${testResult.pass ? 'pass': 'fail'}  - ${testName}</div>`;
                         if(testResult.assertion != null) {
-                            testEl.innerHTML += `<pre>${testResult.assertion}</pre>`;
+                            testEl.innerHTML += `<pre style="color: red;">${testResult.assertion}</pre>`;
                         }
                         if(testResult.error != null) {
-                            testEl.innerHTML += `<pre>${testResult.error}</pre>`;
+                            testEl.innerHTML += `<pre style="color: red;">${testResult.error}</pre>`;
                         }
                         if(testResult.source != null) {
-                            testEl.innerHTML += `<pre>${testResult.source.split('\n        ').join('\n')}</pre>`;
+                            testEl.innerHTML += `<pre class="test-source" style="display: none">${testResult.source.split('\n        ').join('\n')}</pre>`;
+                        
                         }
+                        testEl.childNodes[0].addEventListener('click', function() {
+                            var element = this.parentElement.querySelector('.test-source')
+                            element.style.display = element.style.display == "none" ? "block" : "none";
+                            
+                        });
                         resultEl.querySelector('ul').appendChild(testEl);
                     }
                 }
