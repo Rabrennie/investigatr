@@ -1,4 +1,4 @@
-var investigatr = new (function () {
+function Investigatr() {
     this.options = {
         output: true,
         containerEl: document.querySelector('.investigatr')
@@ -20,7 +20,7 @@ var investigatr = new (function () {
         var endTime = performance.now();
         
         if(this.options.output) {
-            const time = ((endTime - startTime % 60000) / 1000).toFixed(3);
+            const time = ((endTime - startTime % 60000) / 1000);
             this.displayResults(time)
         }
     }
@@ -85,7 +85,9 @@ var investigatr = new (function () {
         }
 
     }
-});
+}
+
+var investigatr = new Investigatr();
 
 function describe(name, options) {
     investigatr.tests[name] = options;

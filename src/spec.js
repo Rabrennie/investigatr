@@ -1,33 +1,21 @@
-describe("Test 1", {
-    data: {
-        test: 0,
-    },
+describe('Investigatr', {
+    data: {},
     beforeEach: function (data) {
-        data.test += 1;
+        data.investigatr = new Investigatr();
     },
     tests: {
-        "1 equals 1": function (data) {
-            return assertEquals(data.test, 1);
+        "Init sets options.output": function (data) {
+            data.investigatr.init({
+                output: false
+            });
+            return assertEquals(data.investigatr.options.output, false);
         },
-        "1 does not equal 2": function (data) {
-            return assertNotEquals(data.test, 2);
-        },
-        "test2": function (data) {
-            return assertEquals(data.test, asd);
-        }
-    }
-})
 
-describe("Test 2", {
-    data: {
-        test: 0,
-    },
-    beforeEach: function (data) {
-        data.test += 1;
-    },
-    tests: {
-        "the best test": function (data) {
-            return assertEquals(vcvc, asd);
+        "Init sets options.containerEl": function (data) {
+            data.investigatr.init({
+                containerEl: "testing"
+            });
+            return assertEquals(data.investigatr.options.containerEl, "testing");
         }
     }
 })
