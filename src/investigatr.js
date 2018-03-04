@@ -41,7 +41,7 @@ function Investigatr() {
             try {
                 const assert = options.tests[testName].apply(options, [options.data]);
                 pass = assert.result;
-                assertion = assert.assertion;
+                assertion = assert.message;
             } catch (e) {
                 pass = false;
                 error = e.stack;
@@ -69,16 +69,26 @@ function testGroup(name, options) {
 }
 
 // TODO: maybe these should return errors
-function assertEquals(a, b) {
-    return {
-        result: a == b,
-        assertion: a + " == " + b
+function assertEquals(actual, expected) {
+    const assertionResponse =  {
+        result: actual == expected,
     };
+
+    if(!assertionResponse.result) {
+        assertionResponse.message = `expected(${expected}) is not equal to actual(${actual})`;
+    }
+
+    return assertionResponse;
 }
 
-function assertNotEquals(a, b) {
-    return {
-        result: a != b,
-        assertion: a + " != " + b
+function assertNotEquals(actual, expected) {
+    const assertionResponse =  {
+        result: actual != expected,
     };
+
+    if(!assertionResponse.result) {
+        assertionResponse.message = `expected(${expected}) is equal to actual(${actual})`;
+    }
+
+    return assertionResponse;
 }

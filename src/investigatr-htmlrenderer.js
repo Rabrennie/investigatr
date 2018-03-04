@@ -30,7 +30,16 @@ function InvestigatrHtmlRenderer(options) {
                             passCount += 1
                         }
                         testEl.innerHTML = testResult.pass ? 'pass': 'fail';
-                        testEl.innerHTML += ` - ${testName} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source.split('\n        ').join('\n')}</pre>`
+                        testEl.innerHTML += ` - ${testName}`;
+                        if(testResult.assertion != null) {
+                            testEl.innerHTML += `<pre>${testResult.assertion}</pre>`;
+                        }
+                        if(testResult.error != null) {
+                            testEl.innerHTML += `<pre>${testResult.error}</pre>`;
+                        }
+                        if(testResult.source != null) {
+                            testEl.innerHTML += `<pre>${testResult.source.split('\n        ').join('\n')}</pre>`;
+                        }
                         resultEl.querySelector('ul').appendChild(testEl);
                     }
                 }
