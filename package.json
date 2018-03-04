@@ -1,6 +1,6 @@
 {
   "name": "investigatr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "investigatr is a minimal, extensible JavaScript test framework",
   "directories": {
     "test": "tests"
