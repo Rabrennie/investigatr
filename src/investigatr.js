@@ -1,59 +1,63 @@
 var investigatr = new (function () {
     this.options = {
         output: true,
+        containerEl: document.querySelector('.investigatr')
     };
-    
+
     this.tests = {};
+
+    this.results = {};
     
     this.run = function () {
-        var containerEl = document.querySelector('.investigatr');
-        var timeEl = document.createElement('div');
         var startTime = performance.now();
+
         for (const test in this.tests) {
             if (this.tests.hasOwnProperty(test)) {
                 this.runTest(test, this.tests[test]);
             }
         }
+
         var endTime = performance.now();
+        
         if(this.options.output) {
-            var milliseconds = endTime - startTime;
-            var time = ((milliseconds % 60000) / 1000).toFixed(3);
-            timeEl.innerHTML = time + " secs";
-            containerEl.insertBefore(timeEl, containerEl.firstChild);
+            const time = ((endTime - startTime % 60000) / 1000).toFixed(3);
+            this.displayResults(time)
         }
     }
 
     this.runTest = function (name, test) {
         const options = test;
-        var data = { ...options.data };
-        if(this.options.output) {
-            var resultEl = document.createElement('div');
-            resultEl.innerHTML = `<h3>${name}</h3><ul></ul>`
-            document.querySelector('.investigatr').appendChild(resultEl)
-        }
+        const originalData = { ...options.data };
+
+        this.results[name] = {};
+
         for (let testName in options.tests) {
-            options.data = { ...data };
+            options.data = { ...originalData };
             options.beforeEach.apply(options, [options.data]);
             
-            const testEl = document.createElement('li');
+            let pass, error;
+
             try {
-                var result = options.tests[testName].apply(options, [options.data]);
-                if(this.options.output) {
-                    testEl.innerHTML = `${result ? 'pass' : 'fail'} - ${testName}<pre style="color: grey;">${options.tests[testName].toString()}</pre>`;
-                }
+                pass = options.tests[testName].apply(options, [options.data]);
             } catch (e) {
-                if(this.options.output) {
-                    testEl.innerHTML = `fail - ${testName}<pre style="color: red;">${e.stack}</pre>`;
-                }
+                pass = false;
+                error = e.stack;
             }
-            if(this.options.output) {
-                resultEl.querySelector('ul').appendChild(testEl);
-            }
+
+            this.results[name][testName] = {
+                pass,
+                error,
+                source: options.tests[testName].toString(),
+            };
         }
     }
 
     this.init = function(options) {
         this.options = Object.assign(this.options, options);
+    }
+
+    this.displayResults = function() {
+        
     }
 });
 

@@ -16,7 +16,6 @@ describe("Test 1", {
 })
 
 describe("Test 2", {
-    output: false,
     data: {
         test: 0,
     },
