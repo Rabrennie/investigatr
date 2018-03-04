@@ -63,3 +63,18 @@ testGroup('.assertNotEqual()', {
         }
     }
 })
+
+testGroup('failing test', {
+    data: {},
+    tests: {
+        "result is false when 1 == 1 ": function(data) {
+            let result = assertEquals(1,1).result;
+            return assertEquals(result, false);
+        },
+
+        "result is false when 1 == 2 ": function(data) {
+            let result = assertEquals(1,sdf).result;
+            return assertEquals(result, false);
+        },
+    }
+})
