@@ -75,9 +75,8 @@ function Investigatr() {
                         const testResult = element[test];
                         const testEl = document.createElement('li');
                         testEl.innerHTML = testResult.pass ? 'pass': 'fail';
-                        testEl.innerHTML += ` - ${test} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source}</pre>`
+                        testEl.innerHTML += ` - ${test} <pre>${testResult.assertion}</pre><pre>${testResult.error}</pre><pre>${testResult.source.split('\n        ').join('\n')}</pre>`
                         resultEl.appendChild(testEl);
-                        console.log(testResult);
                     }
                 }
                 this.options.containerEl.appendChild(resultEl);
